@@ -24,16 +24,17 @@ DROP TABLE IF EXISTS `cu_customers`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cu_customers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(100) NOT NULL,
   `cu_fname` varchar(100) NOT NULL,
   `cu_lname` varchar(100) NOT NULL,
   `cu_email` varchar(100) NOT NULL,
   `cu_city` varchar(100) NOT NULL,
   `cu_region` varchar(100) NOT NULL,
   `cu_phone` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
+  `updated_by` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -82,15 +83,16 @@ DROP TABLE IF EXISTS `or_orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `or_orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(100) NOT NULL,
   `or_number` int(11) NOT NULL,
   `or_date` date NOT NULL,
   `or_price` int(11) NOT NULL,
   `or_quantity` int(11) NOT NULL,
   `fk_customer_order` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
+  `updated_by` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `customer_id` (`fk_customer_order`),
   CONSTRAINT `or_orders_ibfk_1` FOREIGN KEY (`fk_customer_order`) REFERENCES `cu_customers` (`id`)
@@ -115,19 +117,20 @@ DROP TABLE IF EXISTS `pr_products`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pr_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(100) NOT NULL,
   `pr_name` varchar(100) NOT NULL,
   `pr_price` int(11) NOT NULL,
   `pr_quantity` int(11) NOT NULL,
   `pr_category` varchar(100) NOT NULL,
   `pr_image` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `product_supplier_id` int(11) DEFAULT NULL,
-  `updated_by` int(11) NOT NULL,
+  `updated_by` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `supplier_id` (`product_supplier_id`),
-  CONSTRAINT `pr_products_ibfk_1` FOREIGN KEY (`product_supplier_id`) REFERENCES `sh_shop` (`id`)
+  CONSTRAINT `pr_products_ibfk_1` FOREIGN KEY (`product_supplier_id`) REFERENCES `sh_shops` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -165,32 +168,33 @@ INSERT INTO `ro_roles` VALUES (0,'ADMIN'),(1,'USER');
 UNLOCK TABLES;
 
 --
--- Table structure for table `sh_shop`
+-- Table structure for table `sh_shops`
 --
 
-DROP TABLE IF EXISTS `sh_shop`;
+DROP TABLE IF EXISTS `sh_shops`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sh_shop` (
+CREATE TABLE `sh_shops` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(100) NOT NULL,
   `sh_name` varchar(50) NOT NULL,
   `sh_phone` varchar(50) NOT NULL,
   `sh_email` varchar(60) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_by` int(11) NOT NULL,
+  `updated_by` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `sh_shop`
+-- Dumping data for table `sh_shops`
 --
 
-LOCK TABLES `sh_shop` WRITE;
-/*!40000 ALTER TABLE `sh_shop` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sh_shop` ENABLE KEYS */;
+LOCK TABLES `sh_shops` WRITE;
+/*!40000 ALTER TABLE `sh_shops` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sh_shops` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -204,8 +208,9 @@ CREATE TABLE `su_shop_user` (
   `id` int(11) NOT NULL,
   `shop_id` int(11) NOT NULL,
   PRIMARY KEY (`id`,`shop_id`),
+  KEY `shop_id` (`shop_id`),
   CONSTRAINT `su_shop_user_ibfk_1` FOREIGN KEY (`id`) REFERENCES `us_users` (`id`),
-  CONSTRAINT `su_shop_user_ibfk_2` FOREIGN KEY (`id`) REFERENCES `sh_shop` (`id`)
+  CONSTRAINT `su_shop_user_ibfk_2` FOREIGN KEY (`shop_id`) REFERENCES `sh_shops` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -253,7 +258,7 @@ DROP TABLE IF EXISTS `us_users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `us_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uui` varchar(100) NOT NULL,
+  `uuid` varchar(100) NOT NULL,
   `us_email` varchar(50) NOT NULL,
   `us_username` varchar(50) NOT NULL,
   `us_password` varchar(50) NOT NULL,
@@ -284,4 +289,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 21:33:32
+-- Dump completed on 2020-05-25 22:28:53
