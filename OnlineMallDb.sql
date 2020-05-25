@@ -265,7 +265,7 @@ CREATE TABLE `us_users` (
   `us_email` varchar(50) NOT NULL,
   `us_username` varchar(50) NOT NULL,
   `us_password` varchar(50) NOT NULL,
-  `us_enabled` tinyint(4) NOT NULL,
+  `us_enabled` varchar(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
@@ -292,4 +292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 22:54:55
+-- Dump completed on 2020-05-25 22:58:23
