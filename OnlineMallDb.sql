@@ -207,12 +207,12 @@ DROP TABLE IF EXISTS `su_shop_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `su_shop_user` (
-  `id` int(11) NOT NULL,
-  `shop_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`shop_id`),
-  KEY `shop_id` (`shop_id`),
-  CONSTRAINT `su_shop_user_ibfk_1` FOREIGN KEY (`id`) REFERENCES `us_users` (`id`),
-  CONSTRAINT `su_shop_user_ibfk_2` FOREIGN KEY (`shop_id`) REFERENCES `sh_shops` (`id`)
+  `us_fk` int(11) NOT NULL,
+  `sh_fk` int(11) NOT NULL,
+  PRIMARY KEY (`us_fk`,`sh_fk`),
+  KEY `shop_id` (`sh_fk`),
+  CONSTRAINT `su_shop_user_ibfk_1` FOREIGN KEY (`us_fk`) REFERENCES `us_users` (`id`),
+  CONSTRAINT `su_shop_user_ibfk_2` FOREIGN KEY (`sh_fk`) REFERENCES `sh_shops` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -293,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 23:20:50
+-- Dump completed on 2020-05-25 23:29:42
