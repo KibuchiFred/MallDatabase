@@ -233,12 +233,12 @@ DROP TABLE IF EXISTS `us_user_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `us_user_roles` (
-  `user_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `role_id` (`role_id`),
-  CONSTRAINT `us_user_roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `us_users` (`id`),
-  CONSTRAINT `us_user_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `ro_roles` (`id`)
+  `us_fk` int(11) NOT NULL,
+  `ro_fk` int(11) NOT NULL,
+  PRIMARY KEY (`us_fk`,`ro_fk`),
+  KEY `role_id` (`ro_fk`),
+  CONSTRAINT `us_user_roles_ibfk_1` FOREIGN KEY (`us_fk`) REFERENCES `us_users` (`id`),
+  CONSTRAINT `us_user_roles_ibfk_2` FOREIGN KEY (`ro_fk`) REFERENCES `ro_roles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -293,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 23:12:20
+-- Dump completed on 2020-05-25 23:18:03
