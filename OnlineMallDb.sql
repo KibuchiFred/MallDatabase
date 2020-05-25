@@ -226,29 +226,29 @@ LOCK TABLES `su_shop_user` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ur_user_roles`
+-- Table structure for table `us_user_roles`
 --
 
-DROP TABLE IF EXISTS `ur_user_roles`;
+DROP TABLE IF EXISTS `us_user_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ur_user_roles` (
+CREATE TABLE `us_user_roles` (
   `user_id` int(11) NOT NULL,
-  `id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`,`id`),
-  KEY `id` (`id`),
-  CONSTRAINT `ur_user_roles_ibfk_1` FOREIGN KEY (`id`) REFERENCES `us_users` (`id`),
-  CONSTRAINT `ur_user_roles_ibfk_2` FOREIGN KEY (`id`) REFERENCES `ro_roles` (`id`)
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `us_user_roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `us_users` (`id`),
+  CONSTRAINT `us_user_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `ro_roles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ur_user_roles`
+-- Dumping data for table `us_user_roles`
 --
 
-LOCK TABLES `ur_user_roles` WRITE;
-/*!40000 ALTER TABLE `ur_user_roles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ur_user_roles` ENABLE KEYS */;
+LOCK TABLES `us_user_roles` WRITE;
+/*!40000 ALTER TABLE `us_user_roles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `us_user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -293,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 23:01:01
+-- Dump completed on 2020-05-25 23:07:58
