@@ -178,6 +178,7 @@ CREATE TABLE `sh_shops` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` varchar(100) NOT NULL,
   `sh_name` varchar(50) NOT NULL,
+  `sh_enabled` varchar(10) NOT NULL,
   `sh_icon` varchar(50) NOT NULL,
   `sh_description` varchar(150) NOT NULL,
   `sh_tag` varchar(100) NOT NULL,
@@ -292,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 22:58:23
+-- Dump completed on 2020-05-25 23:01:01
