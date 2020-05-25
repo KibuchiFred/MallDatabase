@@ -178,7 +178,7 @@ CREATE TABLE `sh_shops` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` varchar(100) NOT NULL,
   `sh_name` varchar(50) NOT NULL,
-  `sh_enabled` varchar(10) NOT NULL,
+  `sh_enabled` varchar(1) NOT NULL,
   `sh_icon` varchar(50) NOT NULL,
   `sh_description` varchar(150) NOT NULL,
   `sh_tag` varchar(100) NOT NULL,
@@ -266,7 +266,7 @@ CREATE TABLE `us_users` (
   `us_email` varchar(50) NOT NULL,
   `us_username` varchar(50) NOT NULL,
   `us_password` varchar(50) NOT NULL,
-  `us_enabled` varchar(20) NOT NULL,
+  `us_enabled` varchar(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
@@ -293,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 23:07:58
+-- Dump completed on 2020-05-25 23:12:20
