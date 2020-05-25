@@ -259,6 +259,8 @@ DROP TABLE IF EXISTS `us_users`;
 CREATE TABLE `us_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` varchar(100) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `lname` varchar(50) NOT NULL,
   `us_email` varchar(50) NOT NULL,
   `us_username` varchar(50) NOT NULL,
   `us_password` varchar(50) NOT NULL,
@@ -289,4 +291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 22:35:59
+-- Dump completed on 2020-05-25 22:42:59
