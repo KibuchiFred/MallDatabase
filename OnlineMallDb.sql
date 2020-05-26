@@ -108,6 +108,7 @@ CREATE TABLE `ur_user_roles` (
   `us_fk` int(11) NOT NULL,
   `ro_fk` int(11) NOT NULL,
   `sh_fk` int(11) NOT NULL,
+  `ro_dashboard` varchar(100) NOT NULL,
   PRIMARY KEY (`us_fk`,`ro_fk`),
   KEY `role_id` (`ro_fk`),
   KEY `sh_fk` (`sh_fk`),
@@ -168,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-26 16:00:17
+-- Dump completed on 2020-05-26 20:12:30
