@@ -25,6 +25,7 @@ DROP TABLE IF EXISTS `ro_roles`;
 CREATE TABLE `ro_roles` (
   `id` int(11) NOT NULL,
   `rn_role_name` varchar(30) NOT NULL,
+  `ro_dashboard` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -35,7 +36,7 @@ CREATE TABLE `ro_roles` (
 
 LOCK TABLES `ro_roles` WRITE;
 /*!40000 ALTER TABLE `ro_roles` DISABLE KEYS */;
-INSERT INTO `ro_roles` VALUES (0,'ADMIN'),(1,'USER');
+INSERT INTO `ro_roles` VALUES (0,'ADMIN',''),(1,'USER','');
 /*!40000 ALTER TABLE `ro_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +83,6 @@ CREATE TABLE `ur_user_roles` (
   `us_fk` int(11) NOT NULL,
   `ro_fk` int(11) NOT NULL,
   `sh_fk` int(11) NOT NULL,
-  `ro_dashboard` varchar(100) NOT NULL,
   PRIMARY KEY (`us_fk`,`ro_fk`),
   KEY `role_id` (`ro_fk`),
   KEY `sh_fk` (`sh_fk`),
@@ -143,4 +143,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-26 20:21:57
+-- Dump completed on 2020-05-26 20:45:51
