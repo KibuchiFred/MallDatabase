@@ -72,32 +72,6 @@ LOCK TABLES `sh_shops` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `su_shop_user`
---
-
-DROP TABLE IF EXISTS `su_shop_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `su_shop_user` (
-  `us_fk` int(11) NOT NULL,
-  `sh_fk` int(11) NOT NULL,
-  PRIMARY KEY (`us_fk`,`sh_fk`),
-  KEY `shop_id` (`sh_fk`),
-  CONSTRAINT `su_shop_user_ibfk_1` FOREIGN KEY (`us_fk`) REFERENCES `us_users` (`id`),
-  CONSTRAINT `su_shop_user_ibfk_2` FOREIGN KEY (`sh_fk`) REFERENCES `sh_shops` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `su_shop_user`
---
-
-LOCK TABLES `su_shop_user` WRITE;
-/*!40000 ALTER TABLE `su_shop_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `su_shop_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ur_user_roles`
 --
 
@@ -169,4 +143,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-26 20:12:30
+-- Dump completed on 2020-05-26 20:21:57
