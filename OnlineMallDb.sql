@@ -16,134 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cu_customers`
---
-
-DROP TABLE IF EXISTS `cu_customers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cu_customers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(100) NOT NULL,
-  `cu_fname` varchar(100) NOT NULL,
-  `cu_lname` varchar(100) NOT NULL,
-  `cu_email` varchar(100) NOT NULL,
-  `cu_city` varchar(100) NOT NULL,
-  `cu_region` varchar(100) NOT NULL,
-  `cu_phone` varchar(100) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cu_customers`
---
-
-LOCK TABLES `cu_customers` WRITE;
-/*!40000 ALTER TABLE `cu_customers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cu_customers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `od_order_details`
---
-
-DROP TABLE IF EXISTS `od_order_details`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `od_order_details` (
-  `fk_product_order` int(11) NOT NULL,
-  `fk_order_product` int(11) NOT NULL,
-  PRIMARY KEY (`fk_product_order`,`fk_order_product`),
-  KEY `order_id` (`fk_order_product`),
-  CONSTRAINT `od_order_details_ibfk_1` FOREIGN KEY (`fk_product_order`) REFERENCES `pr_products` (`id`),
-  CONSTRAINT `od_order_details_ibfk_2` FOREIGN KEY (`fk_order_product`) REFERENCES `or_orders` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `od_order_details`
---
-
-LOCK TABLES `od_order_details` WRITE;
-/*!40000 ALTER TABLE `od_order_details` DISABLE KEYS */;
-/*!40000 ALTER TABLE `od_order_details` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `or_orders`
---
-
-DROP TABLE IF EXISTS `or_orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `or_orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(100) NOT NULL,
-  `or_number` int(11) NOT NULL,
-  `or_date` date NOT NULL,
-  `or_price` int(11) NOT NULL,
-  `or_quantity` int(11) NOT NULL,
-  `fk_customer_order` int(11) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `customer_id` (`fk_customer_order`),
-  CONSTRAINT `or_orders_ibfk_1` FOREIGN KEY (`fk_customer_order`) REFERENCES `cu_customers` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `or_orders`
---
-
-LOCK TABLES `or_orders` WRITE;
-/*!40000 ALTER TABLE `or_orders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `or_orders` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pr_products`
---
-
-DROP TABLE IF EXISTS `pr_products`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pr_products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(100) NOT NULL,
-  `pr_name` varchar(100) NOT NULL,
-  `pr_price` int(11) NOT NULL,
-  `pr_quantity` int(11) NOT NULL,
-  `pr_category` varchar(100) NOT NULL,
-  `pr_image` varchar(50) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_by` int(11) NOT NULL,
-  `updated_by` int(11) NOT NULL,
-  `product_supplier_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `supplier_id` (`product_supplier_id`),
-  CONSTRAINT `pr_products_ibfk_1` FOREIGN KEY (`product_supplier_id`) REFERENCES `sh_shops` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pr_products`
---
-
-LOCK TABLES `pr_products` WRITE;
-/*!40000 ALTER TABLE `pr_products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pr_products` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ro_roles`
 --
 
@@ -235,10 +107,13 @@ DROP TABLE IF EXISTS `ur_user_roles`;
 CREATE TABLE `ur_user_roles` (
   `us_fk` int(11) NOT NULL,
   `ro_fk` int(11) NOT NULL,
+  `sh_fk` int(11) NOT NULL,
   PRIMARY KEY (`us_fk`,`ro_fk`),
   KEY `role_id` (`ro_fk`),
+  KEY `sh_fk` (`sh_fk`),
   CONSTRAINT `ur_user_roles_ibfk_1` FOREIGN KEY (`us_fk`) REFERENCES `us_users` (`id`),
-  CONSTRAINT `ur_user_roles_ibfk_2` FOREIGN KEY (`ro_fk`) REFERENCES `ro_roles` (`id`)
+  CONSTRAINT `ur_user_roles_ibfk_2` FOREIGN KEY (`ro_fk`) REFERENCES `ro_roles` (`id`),
+  CONSTRAINT `ur_user_roles_ibfk_3` FOREIGN KEY (`sh_fk`) REFERENCES `sh_shops` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -293,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 23:29:42
+-- Dump completed on 2020-05-26 16:00:17
